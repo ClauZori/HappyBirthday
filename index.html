@@ -1,48 +1,112 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="ro">
 <head>
   <meta charset="UTF-8">
-  <title>La multi ani!</title>
-  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css'><link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>La mulți ani!</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      text-align: center;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      color: white;
+      overflow: hidden;
+    }
 
+    .container {
+      background: rgba(255, 255, 255, 0.2);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(10px);
+    }
+
+    .button-group {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      position: relative;
+      margin-top: 20px;
+    }
+
+    button {
+      padding: 12px 25px;
+      margin: 0;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 18px;
+      font-weight: bold;
+      transition: transform 0.2s ease-in-out;
+    }
+
+    .yes {
+      background-color: #28a745;
+      color: white;
+    }
+
+    .yes:hover {
+      background-color: #218838;
+      transform: scale(1.1);
+    }
+
+    .no {
+      background-color: #dc3545;
+      color: white;
+      position: relative;
+    }
+  </style>
 </head>
 <body>
-<div id="wrapper">
-  <div id="wish">
-    <div>H</div>
-    <div>A</div>
-    <div>P</div>
-    <div>P</div>
-    <div>Y</div>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <div>B</div>
-    <div>I</div>
-    <div>R</div>
-    <div>T</div>
-    <div>H</div>
-    <div>D</div>
-    <div>A</div>
-    <div>Y</div>
-
-   
-    <div>I</div>
-    <div>O</div>
-    <div>A</div>
-    <div>N</div>
-    <div>A</div>
-  
-</div>
-  <div id="present">
-    <div class="img_box">
-      <img src="./img/Ioana.png" id="cat" />
-    </div>
-    <div id="box"></div>
-    <div id="top">
-      <img src="http://pngimg.com/uploads/ribbon/ribbon_PNG1547.png" />
+  <div class="container">
+    <h2>Azi e ziua ta?</h2>
+    <p>Hai să sărbătorim ☕🍕</p>
+    <div class="button-group">
+      <button class="yes" onclick="openNewWindow()">Da! 🎉</button>
+      <button class="no" onclick="moveButton()">Nu, mai învăț... 😓</button>
     </div>
   </div>
-</div>
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script><script  src="script.js"></script>
 
+  <script>
+    function openNewWindow() {
+      // Deschide lma.html într-un tab nou
+      window.open("lma.html", "_blank");
+    }
+
+    let noClickCount = 0;
+    let currentX = 0;
+    let currentY = 0;
+    const moveDistance = 200;
+
+    function moveButton() {
+      let button = document.querySelector('.no');
+
+      let maxX = window.innerWidth - button.offsetWidth;
+      let maxY = window.innerHeight - button.offsetHeight;
+
+      let moveX = (Math.random() - 0.5) * moveDistance * 2;
+      let moveY = (Math.random() - 0.5) * moveDistance * 2;
+
+      currentX = Math.max(0, Math.min(maxX, currentX + moveX));
+      currentY = Math.max(0, Math.min(maxY, currentY + moveY));
+
+      button.style.transform = `translate(${currentX}px, ${currentY}px)`;
+
+      noClickCount++;
+      if (noClickCount === 1) {
+        button.innerText = "Sigur? 🤨";
+      } else if (noClickCount === 2) {
+        button.innerText = "Am greșit ziua? 🤔";
+      } else if (noClickCount >= 3) {
+        button.innerText = "Ups! 😜";
+      }
+    }
+  </script>
 </body>
 </html>
